@@ -4,6 +4,7 @@ import CommandPalette from "react-command-palette";
 import Home from "./Home";
 import Product from "./Product";
 import { useState } from "react";
+import SampleHeader from "./SampleHeader";
 
 const MAGENTO_ADMIN = "https://magento2.demoservices.front-commerce.com/admin";
 const goToMagentoAdmin = (url) => goTo(MAGENTO_ADMIN + url);
@@ -103,6 +104,7 @@ const pages = [
 const roles = ["Standard", "Marketing"];
 
 function App() {
+  const [isDisplayed, setDisplayed] = useState(false);
   const [page, setPage] = useState(pages[0]);
   const [role, setRole] = useState(roles[0]);
   const commands = [
@@ -113,15 +115,24 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <CommandPalette
-          commands={commands}
-          trigger={
-            <a className="App-link" href="#foo">
-              Open admin palette (ctrl+k / g then a) ⚙️
-            </a>
-          }
-          hotKeys={["/", "ctrl+k", "g a"]}
-        />
+        {isDisplayed ? (
+          <CommandPalette
+            commands={commands}
+            display="inline"
+            alwaysRenderCommands={false}
+            header={<SampleHeader onClose={() => setDisplayed(false)} />}
+            hotKeys={["/", "ctrl+k", "g a"]}
+            placeholder="Try typing 'Edit', 'current' or 'Analytics'"
+          />
+        ) : (
+          <button
+            className="App-palette"
+            onClick={() => setDisplayed(true)}
+            title="ctrl+k or g then a"
+          >
+            Open admin palette ⚙️
+          </button>
+        )}
 
         <nav>
           {pages.map((page, i) => (
