@@ -112,6 +112,11 @@ function App() {
     ...(role === "Marketing" ? presets["Google Analytics"] : []),
   ];
 
+  /**
+   * ToDo:
+   *  [] make it work with shortcuts
+   *  [] add categories
+   */
   return (
     <div className="App">
       <header className="App-header">
@@ -119,7 +124,6 @@ function App() {
           <CommandPalette
             commands={commands}
             display="inline"
-            alwaysRenderCommands={false}
             header={<SampleHeader onClose={() => setDisplayed(false)} />}
             hotKeys={["/", "ctrl+k", "g a"]}
             placeholder="Try typing 'Edit', 'current' or 'Analytics'"
@@ -130,7 +134,7 @@ function App() {
             onClick={() => setDisplayed(true)}
             title="ctrl+k or g then a"
           >
-            Open admin palette ⚙️
+            Open the admin palette ⚙️
           </button>
         )}
 
